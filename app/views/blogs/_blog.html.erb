@@ -1,0 +1,40 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <div class="message clearfix">
+
+      <div class="message_box">
+        <p class="user_name">
+          <span class="blog_name"><%= blog.user.nickname %></span>
+          <span class="time"><%= blog.created_at.strftime('%Y年%m月%d日 %H:%M') %></span>
+          <%= link_to "/users/#{blog.user_id}" do %>
+          <%= image_tag blog.user.user_image %>
+          <% end %>
+
+
+
+        </p>
+        <p class="text">
+          <%= blog.text %>
+        </p>
+
+        <ul>
+          <% if user_signed_in? && current_user.id == blog.user_id %>
+
+            <li>
+              <%= link_to "/blogs/#{blog.id}", method: :delete, data: { confirm: '削除しますか？'} do%>
+                <i class="material-icons">clear</i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to "/blogs/#{blog.id}/edit", method: :get do %>
+                <i class="material-icons">mode_edit</i>
+              <% end %>
+            </li>
+
+          </ul>
+          <div>
+        </div>
+      <% end %>
+
+      </div>
+    </div>

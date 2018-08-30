@@ -1,0 +1,31 @@
+<div class="contents row" >
+
+    <div class="message clearfix">
+
+      <div class="message_box">
+        <p class="user_name">
+          <span class="blog_name"><%= @blog.user.nickname %></span>
+          <span class="time"><%= @blog.created_at.strftime('%Y年%m月%d日 %H:%M') %></span>
+          <%= image_tag @blog.user.user_image %>
+        </p>
+        <p class="text">
+          <%= @blog.text %>
+        </p>
+
+        <% if user_signed_in? && current_user.id == @blog.user_id %>
+        <div>
+          <ul>
+            <li>
+              <%= link_to '削除', "/blogs/#{@blog.id}", method: :delete, class: "waves-effect waves-light btn", data: { confirm: '削除しますか？'} %>
+            </li>
+            <li>
+              <%= link_to '編集', "/blogs/#{@blog.id}/edit", method: :get, class: "waves-effect waves-light btn" %>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+
+</div>

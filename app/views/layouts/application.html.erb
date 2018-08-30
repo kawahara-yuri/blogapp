@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BLOG</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Unica+One::latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+
+
+  </head>
+
+  <body>
+    <nav class="teal">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo blog">BLOG</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down ">
+          <% if user_signed_in? %>
+            <li class="iconimage"><%= image_tag current_user.user_image %></li>
+            <li><a href="/users/<%= current_user.id %>"><%= current_user.nickname %></a></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <li><a href="/blogs/new">投稿する</a></li>
+
+          <% else %>
+            <li><%= link_to "ログイン", new_user_session_path, class: 'post' %></li>
+            <li><%= link_to "新規登録", new_user_registration_path, class: 'post' %></li>
+          <% end %>
+          </ul>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+    <footer>
+      <p>
+        blog
+      </p>
+    </footer>
+  </body>
+</html>
